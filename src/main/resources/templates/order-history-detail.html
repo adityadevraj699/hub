@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="base :: layout(~{::section})">
+<section style="background: #f8f9fa; min-height: 100vh; padding: 50px 0;">
+
+  <div class="container">
+    <a href="/order/history" class="btn btn-outline-secondary mb-4 shadow-sm">
+      <i class="bi bi-arrow-left me-1"></i> Back to Orders
+    </a>
+
+    <!-- Order Summary Card -->
+    <div class="card shadow-sm border-0 mb-5 rounded-4">
+      <div class="card-body">
+        <h4 class="fw-bold">Order #<span th:text="${order.id}"></span></h4>
+        <p class="mb-1"><strong>Date:</strong> 
+          <span th:text="${#temporals.format(order.createdAt, 'dd MMM yyyy, HH:mm')}"></span>
+        </p>
+        <p class="mb-1">
+          <strong>Status:</strong> 
+          <span class="badge rounded-pill text-white"
+                th:classappend="${
+                  order.status.name() == 'PENDING' ? 'bg-warning' :
+                  (order.status.name() == 'PROCESSING' ? 'bg-primary' :
+                  (order.status.name() == 'SHIPPED' ? 'bg-info' :
+                  (order.status.name() == 'DELIVERED' ? 'bg-success' :
+                  (order.status.name() == 'CANCELLED' ? 'bg-danger' : 'bg-secondary'))))
+                }"
+                th:text="${order.status.name()}"></span>
+        </p>
+        <p class="mb-0"><strong>Total Price:</strong> $<span th:text="${order.totalPrice}"></span></p>
+      </div>
+    </div>
+
+    <!-- Ordered Items -->
+    <div class="card shadow-sm border-0 rounded-4">
+      <div class="card-header bg-dark text-white rounded-top-4">
+        <h5 class="mb-0">Ordered Items</h5>
+      </div>
+      <div class="card-body p-0">
+        <div th:each="item : ${items}" 
+             class="d-flex align-items-center border-bottom py-3 px-3 item-row"
+             style="transition: transform 0.3s, box-shadow 0.3s;">
+          
+          <img th:src="@{${item.product.image}}" alt="Product"
+               class="rounded shadow-sm me-3" style="width: 80px; height: 80px; object-fit: cover;">
+          
+          <div class="flex-grow-1">
+            <h6 class="mb-1 fw-semibold" th:text="${item.product.name}"></h6>
+            <p class="text-muted mb-1" th:text="${item.product.description}"></p>
+            <small class="text-secondary">Quantity: <span th:text="${item.quantity}"></span></small>
+          </div>
+
+          <div class="text-end">
+            <p class="mb-1 fw-bold text-success">$<span th:text="${item.price}"></span></p>
+            <small class="text-muted">Subtotal: $<span th:text="${item.price * item.quantity}"></span></small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <style>
+    .item-row:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      background-color: #fefefe;
+    }
+
+    .card-header h5 {
+      font-size: 1.1rem;
+    }
+
+    .badge {
+      font-size: 0.9rem;
+      padding: 0.4em 0.8em;
+    }
+
+    @media (max-width: 768px) {
+      .item-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .item-row img {
+        margin-bottom: 10px;
+      }
+      .text-end {
+        text-align: left !important;
+        margin-top: 5px;
+      }
+    }
+  </style>
+
+</section>
+</html>

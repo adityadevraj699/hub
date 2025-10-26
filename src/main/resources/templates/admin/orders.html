@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="admin/admin_base :: layout(~{::section})">
+<section class="flex flex-col h-screen max-w-7xl mx-auto p-4">
+    <!-- Page Header -->
+    <div class="flex flex-col gap-4 mb-4 flex-shrink-0">
+        <h1 class="text-3xl font-bold text-gray-800">Orders</h1>
+
+        <!-- Status Filter -->
+        <form method="get" th:action="@{/admin/orders}" class="flex items-center gap-4">
+            <label for="status" class="font-semibold text-gray-700">Filter by status:</label>
+            <select id="status" name="status" class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option th:each="s : ${statuses}"
+                        th:value="${s}"
+                        th:text="${s}"
+                        th:selected="${s.name() == selectedStatus}">
+                </option>
+            </select>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Filter</button>
+        </form>
+    </div>
+
+    <!-- Scrollable Content -->
+    <div class="flex-grow overflow-auto bg-white shadow rounded-lg">
+        <div class="min-w-full overflow-x-auto p-2">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">ID</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">User</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Items</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase tracking-wider">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <tr th:each="order : ${orders}">
+                        <td class="px-6 py-4 whitespace-nowrap" th:text="${order.id}"></td>
+                        <td class="px-6 py-4 whitespace-nowrap" th:text="${order.user.name}"></td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <ul class="list-disc list-inside">
+                                <li th:each="item : ${order.items}" th:text="${item.product.name} + ' x ' + ${item.quantity}"></li>
+                            </ul>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span th:text="${order.status}" th:classappend="${statusColors[order.status]}"></span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <form th:action="@{/admin/orders/update}" method="post" class="flex items-center gap-2">
+                                <input type="hidden" name="orderId" th:value="${order.id}"/>
+                                <select name="status" class="border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option th:each="s : ${statuses}" th:value="${s}" th:text="${s}" th:selected="${s == order.status}"></option>
+                                </select>
+                                <button type="submit" class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition">Update</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="admin/admin_base :: layout(~{::section})">
+<section>
+    <div class="container mt-4">
+        <h3 th:text="${category.id != null ? 'Edit Category' : 'Create Category'}"></h3>
+
+        <form th:action="@{/admin/categories/save}" th:object="${category}" method="post" enctype="multipart/form-data">
+            <input type="hidden" th:field="*{id}" />
+            <div class="mb-3">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" th:field="*{name}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" th:field="*{description}" rows="3"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Image</label>
+                <input type="file" name="imageFile" class="form-control">
+                <div th:if="${category.image != null}" class="mt-2">
+                    <img th:src="${category.image}" style="width:100px;height:100px;object-fit:cover;">
+                </div>
+            </div>
+
+            <button class="btn btn-success" type="submit">Save</button>
+            <a href="/admin/categories" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</section>
+</html>

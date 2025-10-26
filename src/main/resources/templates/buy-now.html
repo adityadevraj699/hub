@@ -1,0 +1,86 @@
+<html lang="en" th:replace="base :: layout(~{::section})">
+<section style="background: #f4f6f8;">
+  <div class="container py-5">
+    <div class="card shadow-lg border-0 rounded-4">
+      <div class="card-body p-5">
+        <h3 class="fw-bold text-primary mb-4">
+          <i class="bi bi-bag-check"></i> Buy Now
+        </h3>
+
+        <div class="row align-items-center mb-4">
+          <div class="col-md-4 text-center">
+            <img th:src="@{${singleProduct.image}}" class="img-fluid rounded-3 shadow-sm product-img" alt="Product" />
+          </div>
+          <div class="col-md-8">
+            <h4 class="fw-semibold mb-2" th:text="${singleProduct.name}"></h4>
+            <p class="text-muted mb-3" th:text="${singleProduct.description}"></p>
+            <p class="fw-bold fs-5 text-success">$<span th:text="${singleProduct.price}"></span></p>
+          </div>
+        </div>
+
+        <form th:action="@{/order/place}" method="post">
+          <input type="hidden" name="productId" th:value="${singleProduct.id}" />
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Quantity</label>
+            <select name="quantity" class="form-select w-auto d-inline-block">
+              <option th:each="i : ${#numbers.sequence(1, singleProduct.quantity)}" 
+                      th:value="${i}" th:text="${i}"></option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Shipping Address</label>
+            <textarea name="address" required class="form-control rounded-3 p-3"
+                      th:text="${user.address != null ? user.address : ''}"></textarea>
+          </div>
+
+          <div class="mb-4">
+            <label class="form-label fw-semibold">Payment Method</label>
+            <select name="paymentMethod" class="form-select rounded-3" required>
+              <option value="COD">Cash on Delivery</option>
+              <option value="ONLINE">Online Payment</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-gradient-success btn-lg w-100">Confirm & Buy</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+  <style>
+    .product-img {
+      transition: transform 0.3s;
+    }
+    .product-img:hover {
+      transform: scale(1.05);
+    }
+
+    .btn-gradient-success {
+      background: linear-gradient(90deg, #28a745, #5cd65c);
+      color: #fff;
+      border-radius: 30px;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .btn-gradient-success:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(40, 167, 69, 0.5);
+    }
+
+    textarea.form-control {
+      min-height: 100px;
+    }
+
+    @media (max-width: 768px) {
+      .product-img {
+        max-height: 250px;
+      }
+    }
+  </style>
+</section>
+</html>

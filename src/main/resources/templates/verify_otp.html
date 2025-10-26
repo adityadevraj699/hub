@@ -1,0 +1,24 @@
+<html lang="en" th:replace="base :: layout(~{::section})">
+<section>
+  <div class="container d-flex justify-content-center align-items-center" style="min-height:80vh;">
+    <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%;">
+      <h3 class="text-center mb-4 text-info fw-bold">Verify OTP</h3>
+
+      <form th:action="@{/verify-otp}" method="post">
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Enter OTP</label>
+          <input type="text" name="otp" class="form-control" placeholder="Enter OTP sent to your email" required>
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-info text-white fw-semibold">Verify</button>
+        </div>
+
+        <div class="text-center mt-3">
+          <a href="/register" class="text-decoration-none">Resend OTP / Edit Details</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+</html>

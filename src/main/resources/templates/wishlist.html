@@ -1,0 +1,60 @@
+<html lang="en" th:replace="base :: layout(~{::section})">
+<section class="py-5" style="background: #f4f6f8;">
+  <div class="container">
+    <h3 class="fw-bold mb-4 text-center">My Wishlist</h3>
+
+    <div class="row g-4">
+      <th:block th:each="item : ${wishlistItems}">
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <div class="card h-100 shadow-sm wishlist-card text-center">
+            <img th:src="@{${item.product.image}}" class="card-img-top wishlist-image" alt="Product" />
+            <div class="card-body d-flex flex-column">
+              <h5 class="fw-bold" th:text="${item.product.name}"></h5>
+              <p class="text-success fw-semibold mb-3">$<span th:text="${item.product.price}"></span></p>
+              <div class="mt-auto d-grid gap-2">
+                <a th:href="@{'/products/' + ${item.product.id}}" class="btn btn-gradient-info btn-sm">View</a>
+                <a th:href="@{'/wishlist/toggle/' + ${item.product.id}}" class="btn btn-gradient-danger btn-sm">Remove</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </th:block>
+    </div>
+  </div>
+
+  <style>
+    .wishlist-card {
+      border-radius: 16px;
+      transition: transform 0.4s, box-shadow 0.4s;
+      overflow: hidden;
+      background: #fff;
+    }
+    .wishlist-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+    .wishlist-image {
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .wishlist-card:hover .wishlist-image {
+      transform: scale(1.05);
+    }
+    .btn-gradient-info {
+      background: linear-gradient(90deg, #0dcaf0, #3fc5f0);
+      color: #fff;
+      border-radius: 30px;
+      transition: 0.3s;
+    }
+    .btn-gradient-info:hover { transform: scale(1.05); }
+    .btn-gradient-danger {
+      background: linear-gradient(90deg, #dc3545, #ff4e4e);
+      color: #fff;
+      border-radius: 30px;
+      transition: 0.3s;
+    }
+    .btn-gradient-danger:hover { transform: scale(1.05); }
+  </style>
+</section>
+</html>

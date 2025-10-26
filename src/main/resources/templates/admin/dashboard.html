@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="admin/admin_base :: layout(~{::section})">
+<section>
+    <div class="container-fluid">
+        <h1 class="text-info fw-bold">Admin Dashboard</h1>
+        <p class="text-muted" th:text="'Welcome, ' + ${user.name} + '!'">Welcome, Admin!</p>
+
+        <div class="row mt-4">
+
+            <!-- Total Products -->
+            <div class="col-md-3 mb-3">
+                <div class="card text-center shadow-sm p-3">
+                    <h5 class="fw-bold">Products</h5>
+                    <p class="fs-4 text-primary">150</p>
+                    <a href="/admin/products" class="btn btn-outline-primary btn-sm">Manage</a>
+                </div>
+            </div>
+
+            <!-- Total Categories -->
+            <div class="col-md-3 mb-3">
+                <div class="card text-center shadow-sm p-3">
+                    <h5 class="fw-bold">Categories</h5>
+                    <p class="fs-4 text-success">12</p>
+                    <a href="/admin/categories" class="btn btn-outline-success btn-sm">Manage</a>
+                </div>
+            </div>
+
+            <!-- Total Users -->
+            <div class="col-md-3 mb-3">
+                <div class="card text-center shadow-sm p-3">
+                    <h5 class="fw-bold">Users</h5>
+                    <p class="fs-4 text-warning">320</p>
+                    <a href="/admin/users" class="btn btn-outline-warning btn-sm">Manage</a>
+                </div>
+            </div>
+
+            <!-- Total Orders -->
+            <div class="col-md-3 mb-3">
+                <div class="card text-center shadow-sm p-3">
+                    <h5 class="fw-bold">Orders</h5>
+                    <p class="fs-4 text-danger">87</p>
+                    <a href="/admin/orders" class="btn btn-outline-danger btn-sm">Manage</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+</html>

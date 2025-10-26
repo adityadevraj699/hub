@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="admin/admin_base :: layout(~{::section})">
+<section>
+    <div class="container-fluid mt-3">
+        <div class="d-flex justify-content-between mb-2">
+            <h2>Products</h2>
+            <a href="/admin/products/create" class="btn btn-primary">Add Product</a>
+        </div>
+
+        <form method="get" class="mb-3">
+            <input type="text" name="keyword" placeholder="Search by name" th:value="${keyword}" class="form-control w-25 d-inline">
+            <button type="submit" class="btn btn-info">Search</button>
+        </form>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Status</th>
+                <th>Trending</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.category.name}"></td>
+                <td th:text="${product.price}"></td>
+                <td th:text="${product.quantity}"></td>
+                <td th:text="${product.status}"></td>
+                <td th:text="${product.isTrending} ? 'Yes' : 'No'"></td>
+                <td><img th:src="${product.image}" width="50"/></td>
+                <td>
+                    <a th:href="@{'/admin/products/edit/' + ${product.id}}" class="btn btn-warning btn-sm">Edit</a>
+                    <a th:href="@{'/admin/products/delete/' + ${product.id}}" class="btn btn-danger btn-sm"
+                       onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+</html>

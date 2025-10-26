@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="admin/admin_base :: layout(~{::section})">
+<section>
+    <div class="container-fluid mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3>Categories</h3>
+            <a href="/admin/categories/create" class="btn btn-info text-white">+ Create Category</a>
+        </div>
+
+        <!-- 🔹 Search -->
+        <form class="mb-3 d-flex" method="get">
+            <input type="text" name="keyword" class="form-control me-2" placeholder="Search by name" th:value="${keyword}">
+            <button class="btn btn-primary">Search</button>
+        </form>
+
+        <!-- 🔹 Category Table -->
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cat : ${categories}">
+                    <td th:text="${cat.id}"></td>
+                    <td th:text="${cat.name}"></td>
+                    <td th:text="${cat.description}"></td>
+                    <td>
+                        <img th:if="${cat.image != null}" th:src="${cat.image}" style="width:60px; height:60px; object-fit:cover;">
+                        <span th:if="${cat.image == null}">No Image</span>
+                    </td>
+                    <td>
+                        <a th:href="@{'/admin/categories/edit/' + ${cat.id}}" class="btn btn-sm btn-warning">Edit</a>
+                        <a th:href="@{'/admin/categories/delete/' + ${cat.id}}" class="btn btn-sm btn-danger"
+                           onclick="return confirm('Are you sure you want to delete this category?');">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 🔹 SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script th:if="${success != null}">
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: /*[[${success}]]*/ '',
+        timer: 2000,
+        showConfirmButton: false
+    });
+</script>
+</section>
+</html>

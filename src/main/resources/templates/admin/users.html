@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="admin/admin_base :: layout(~{::section})">
+<section>
+    <div class="container my-5">
+        <h2 class="section-title">Customers & Orders</h2>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Pending</th>
+                        <th>Processing</th>
+                        <th>Shipped</th>
+                        <th>Delivered</th>
+                        <th>Cancelled</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="r : ${rows}">
+                        <td th:text="${r.id}">-</td>
+                        <td th:text="${r.name}">-</td>
+                        <td th:text="${r.email}">-</td>
+                        <td th:text="${r.phone}">-</td>
+                        <td th:text="${r.pending}">0</td>
+                        <td th:text="${r.processing}">0</td>
+                        <td th:text="${r.shipped}">0</td>
+                        <td th:text="${r.delivered}">0</td>
+                        <td th:text="${r.cancelled}">0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+</html>
