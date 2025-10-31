@@ -56,6 +56,19 @@ public class MainController {
         model.addAttribute("title", "Login | FashionHub");
         return "login";
     }
+    
+    @GetMapping("/about")
+    public String showAbout() {
+    	return "about";
+    }
+    
+    @GetMapping("/contact")
+    public String showCOntact() {
+    	return "contact";
+    }
+    
+    
+    
 
     @GetMapping("/categories")
     public String categories(Model model) {

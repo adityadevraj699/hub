@@ -1,0 +1,183 @@
+<html lang="en" th:replace="base :: layout(~{::section})">
+<section>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* About Section Styling */
+    .about-section {
+      background-color: #f8f9fa;
+      padding: 100px 0;
+      position: relative;
+    }
+
+    .about-content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .about-image {
+      flex: 1 1 45%;
+      text-align: center;
+      position: relative;
+    }
+
+    .about-image img {
+      max-width: 90%;
+      border-radius: 20px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+      transition: transform 0.5s ease, box-shadow 0.3s ease;
+    }
+
+    .about-image img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .about-text {
+      flex: 1 1 50%;
+      padding: 20px;
+    }
+
+    .about-text h2 {
+      font-size: 2.8rem;
+      color: #222;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .about-text h2 span {
+      color: #0dcaf0;
+    }
+
+    .tagline {
+      font-size: 1.3rem;
+      color: #0dcaf0;
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+
+    .about-text p {
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.9;
+      margin-bottom: 25px;
+      text-align: justify;
+    }
+
+    .about-btn {
+      background-color: #0dcaf0;
+      color: #fff;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .about-btn:hover {
+      background-color: #0bb0d4;
+      transform: translateY(-3px);
+    }
+
+    /* Stats Section */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin-top: 60px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-item h3 {
+      font-size: 2.2rem;
+      color: #0dcaf0;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .stat-item p {
+      color: #444;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .about-content {
+        flex-direction: column;
+      }
+
+      .about-text {
+        text-align: center;
+      }
+
+      .stats {
+        gap: 30px;
+      }
+    }
+  </style>
+
+  <div class="about-section">
+    <div class="container">
+      <div class="about-content">
+        <div class="about-image mb-4 mb-lg-0">
+          <img src="https://img.freepik.com/free-photo/beautiful-young-woman-shopping-city_1303-15732.jpg" alt="About FashionHub">
+        </div>
+
+        <div class="about-text">
+          <h2>Welcome to <span>FashionHub</span></h2>
+          <p class="tagline">Your Ultimate Destination for Modern Style & Everyday Elegance</p>
+
+          <p>
+            <strong>FashionHub</strong> was born with a single vision — to redefine how people experience fashion online. 
+            We bring together a diverse collection of trendy, comfortable, and high-quality apparel for men, women, and kids, 
+            making luxury accessible to everyone. 
+          </p>
+
+          <p>
+            From casual wear to party outfits, our designs celebrate individuality and confidence. 
+            Every product is handpicked and crafted with care, combining style, comfort, and sustainability. 
+            At FashionHub, we collaborate with emerging designers and trusted brands to ensure you always 
+            get the best of global fashion — right at your fingertips.
+          </p>
+
+          <p>
+            Our dedicated customer service, fast delivery, and easy return policies are built around 
+            your convenience. Because when you shop with us, it’s not just about clothing — 
+            it’s about being part of a community that values authenticity, creativity, and passion.
+          </p>
+
+          <button class="about-btn">Explore Our Collection</button>
+        </div>
+      </div>
+
+      <!-- Brand Stats -->
+      <div class="stats mt-5">
+        <div class="stat-item">
+          <h3>10+</h3>
+          <p>Years of Experience</p>
+        </div>
+        <div class="stat-item">
+          <h3>250K+</h3>
+          <p>Happy Customers</p>
+        </div>
+        <div class="stat-item">
+          <h3>500+</h3>
+          <p>Brands & Designers</p>
+        </div>
+        <div class="stat-item">
+          <h3>50+</h3>
+          <p>Countries Served</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</html>

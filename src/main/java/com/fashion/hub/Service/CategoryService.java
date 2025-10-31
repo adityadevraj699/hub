@@ -32,13 +32,37 @@ public class CategoryService {
         return categoryRepository.findById(id).orElse(null);
     }
 
+    /**
+     * Save or update category safely
+     */
     public Category saveCategory(Category category, MultipartFile imageFile) throws IOException {
-        if (imageFile != null && !imageFile.isEmpty()) {
-            Map uploadResult = cloudinary.uploader().upload(imageFile.getBytes(),
-                    ObjectUtils.asMap("folder", "fashionhub/categories"));
-            category.setImage((String) uploadResult.get("secure_url"));
+        if (category.getId() != null) {
+            // Update case: fetch existing category
+            Category existingCategory = categoryRepository.findById(category.getId())
+                    .orElseThrow(() -> new RuntimeException("Category not found"));
+
+            existingCategory.setName(category.getName());
+            existingCategory.setDescription(category.getDescription());
+
+            // Image update
+            if (imageFile != null && !imageFile.isEmpty()) {
+                Map uploadResult = cloudinary.uploader().upload(imageFile.getBytes(),
+                        ObjectUtils.asMap("folder", "fashionhub/categories"));
+                existingCategory.setImage((String) uploadResult.get("secure_url"));
+            }
+
+            // Products preserve automatically
+            return categoryRepository.save(existingCategory);
+
+        } else {
+            // New save case
+            if (imageFile != null && !imageFile.isEmpty()) {
+                Map uploadResult = cloudinary.uploader().upload(imageFile.getBytes(),
+                        ObjectUtils.asMap("folder", "fashionhub/categories"));
+                category.setImage((String) uploadResult.get("secure_url"));
+            }
+            return categoryRepository.save(category);
         }
-        return categoryRepository.save(category);
     }
 
     public void deleteCategory(Long id) {

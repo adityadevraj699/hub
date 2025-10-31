@@ -1,0 +1,169 @@
+<html lang="en" th:replace="base :: layout(~{::section})">
+<section>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* Contact Section Styling */
+    .contact-section {
+      background-color: #f8f9fa;
+      padding: 100px 0;
+    }
+
+    .contact-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .contact-title h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #222;
+    }
+
+    .contact-title h2 span {
+      color: #0dcaf0;
+    }
+
+    .contact-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 30px;
+    }
+
+    /* Left Side - Info & Map */
+    .contact-info {
+      flex: 1 1 45%;
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-info h3 {
+      color: #0dcaf0;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .contact-info p {
+      color: #555;
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+
+    .contact-info i {
+      color: #0dcaf0;
+      margin-right: 10px;
+    }
+
+    .map-container {
+      margin-top: 20px;
+      border-radius: 15px;
+      overflow: hidden;
+      height: 250px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Right Side - Contact Form */
+    .contact-form {
+      flex: 1 1 50%;
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control {
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      padding: 12px 15px;
+      font-size: 1rem;
+    }
+
+    .form-control:focus {
+      border-color: #0dcaf0;
+      box-shadow: 0 0 5px rgba(13, 202, 240, 0.4);
+    }
+
+    .contact-btn {
+      background-color: #0dcaf0;
+      color: #fff;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .contact-btn:hover {
+      background-color: #0bb0d4;
+      transform: translateY(-3px);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .contact-wrapper {
+        flex-direction: column;
+      }
+
+      .contact-info,
+      .contact-form {
+        width: 100%;
+      }
+    }
+  </style>
+
+  <div class="contact-section">
+    <div class="container">
+      <div class="contact-title">
+        <h2>Get in Touch with <span>FashionHub</span></h2>
+        <p class="text-muted">We’d love to hear from you! Feel free to reach out with any questions or feedback.</p>
+      </div>
+
+      <div class="contact-wrapper">
+        <!-- Left Side: Info + Map -->
+        <div class="contact-info">
+          <h3>Contact Information</h3>
+          <p><i class="bi bi-geo-alt-fill"></i> 123 Fashion Street, New Delhi, India</p>
+          <p><i class="bi bi-telephone-fill"></i> +91 98765 43210</p>
+          <p><i class="bi bi-envelope-fill"></i> support@fashionhub.com</p>
+          <p><i class="bi bi-clock-fill"></i> Mon - Sat: 9:00 AM to 8:00 PM</p>
+
+          <div class="map-container">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.869022210893!2d77.20571207526453!3d28.61417957566836!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfb03e44f157b%3A0x63720e2f6d5b2dc5!2sConnaught%20Place%2C%20New%20Delhi!5e0!3m2!1sen!2sin!4v1697805921720!5m2!1sen!2sin" 
+              allowfullscreen="" 
+              loading="lazy">
+            </iframe>
+          </div>
+        </div>
+
+        <!-- Right Side: Contact Form -->
+        <div class="contact-form">
+          <h3 class="text-center text-info mb-4 fw-bold">Send Us a Message</h3>
+          <form th:action="@{/contact}" method="post">
+            <input type="text" class="form-control" name="name" placeholder="Your Name" required>
+            <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+            <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+            <textarea class="form-control" name="message" rows="5" placeholder="Your Message" required></textarea>
+            <div class="text-center">
+              <button type="submit" class="contact-btn">Send Message</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap Icons CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</section>
+</html>
